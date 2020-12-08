@@ -885,6 +885,7 @@ void diounms_sort(detection *dets, int total, int classes, float thresh, NMS_KIN
             dets[i].sort_class = k;
         }
         qsort(dets, total, sizeof(detection), nms_comparator_v3);
+        printf(" saravanan - qsort %df saravanan ",  total);
         for (i = 0; i < total; ++i)
         {
             if (dets[i].prob[k] == 0) continue;

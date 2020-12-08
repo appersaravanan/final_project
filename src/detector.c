@@ -1668,13 +1668,15 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         //network_predict_image(&net, im); letterbox = 1;
         printf("%s: Predicted in %lf saravanan milli-seconds.\n", input, ((double)get_time_point() - time) / 1000);
         //printf("%s: Predicted in %f seconds.\n", input, (what_time_is_it_now()-time));
-
+            
         int nboxes = 0;
         detection *dets = get_network_boxes(&net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes, letter_box);
+        time = get_time_point();
         if (nms) {
             if (l.nms_kind == DEFAULT_NMS) do_nms_sort(dets, nboxes, l.classes, nms);
             else diounms_sort(dets, nboxes, l.classes, nms, l.nms_kind, l.beta_nms);
         }
+        printf(" Predicted in %lf saravanan milli-seconds.\n",  ((double)get_time_point() - time) / 1000);
         draw_detections_v3(im, dets, nboxes, thresh, names, alphabet, l.classes, ext_output);
         save_image(im, "predictions");
         if (!dont_show) {
