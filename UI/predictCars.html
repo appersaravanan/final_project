@@ -9,16 +9,16 @@
     </style>
 </head>
 <body>
-<div style="display: grid"> 
-<input id="image-selector" type="file">
-<button id="predict-button" style="
+<div style="display: grid">
+    <input id="image-selector" type="file">
+    <button id="predict-button" style="
     width: 300px;
     background: blue;
     padding: 1px;
     margin: 20px;"
->Report car</button>
+    >Report car</button>
 
-<img id="selected-image" src=""/>
+    <img id="selected-image" src=""/>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -35,7 +35,7 @@
             console.log(base64Image);
         }
         reader.readAsDataURL($("#image-selector")[0].files[0]);
-      
+
     });
     let value="{{URL_NAME}}"
     $("#predict-button").click(function(){
@@ -43,7 +43,7 @@
             image: base64Image
         }
         console.log(message);
-        $.post(value, JSON.stringify(message), function(response){          
+        $.post(value, JSON.stringify(message), function(response){
             console.log(response);
         });
     });
