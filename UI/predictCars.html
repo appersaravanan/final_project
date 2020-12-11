@@ -38,6 +38,7 @@
 
     });
     let value="{{URL_NAME}}"
+    let stop="{{stop_URL_NAME}}"
     $("#predict-button").click(function(){
         let message = {
             image: base64Image
@@ -45,6 +46,7 @@
         console.log(message);
         $.post(value, JSON.stringify(message), function(response){
             console.log(response);
+            $.get(stop , JSON.stringify(message), function(response){});
         });
     });
 
