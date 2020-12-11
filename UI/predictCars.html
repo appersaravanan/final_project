@@ -12,9 +12,12 @@
 <input id="image-selector" type="file">
 <button id="predict-button">Predict</button>
 <p style="font-weight:bold">Predictions</p>
+<p>Dog: <span id="dog-prediction"></span></p>
+<p>Cat: <span id="cat-prediction"></span></p>
 <img id="selected-image" src=""/>
-
+<video id="myVideo" autoplay></video>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//wzrd.in/standalone/blob-util@latest"></script>
 <script>
     let base64Image;
     $("#image-selector").change(function() {
@@ -22,6 +25,7 @@
         reader.onload = function(e) {
             let dataURL = reader.result;
             $('#selected-image').attr("src", dataURL);
+            base64Image = dataURL.replace("data:image/jpeg;base64,","");
             base64Image = dataURL.replace("data:image/png;base64,","");
             console.log(base64Image);
         }
@@ -29,17 +33,20 @@
         $("#dog-prediction").text("");
         $("#cat-prediction").text("");
     });
-
+    let value="{{URL_NAME}}"
     $("#predict-button").click(function(){
         let message = {
             image: base64Image
         }
         console.log(message);
-        $.post("http://localhost:5000/predict", JSON.stringify(message), function(response){
-          
+        $.post(value, JSON.stringify(message), function(response){
+            $("#dog-prediction").text(response.prediction.dog.toFixed(6));
+            $("#cat-prediction").text(response.prediction.cat.toFixed(6));
             console.log(response);
         });
     });
+
+
 </script>
 </body>
 </html>
