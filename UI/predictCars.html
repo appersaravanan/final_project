@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>deeplizard predict image app</title>
+    <title>Report a car</title>
     <style>
         * {
             font-size:30px;
@@ -10,10 +10,8 @@
 </head>
 <body>
 <input id="image-selector" type="file">
-<button id="predict-button">Predict</button>
-<p style="font-weight:bold">Predictions</p>
-<p>Dog: <span id="dog-prediction"></span></p>
-<p>Cat: <span id="cat-prediction"></span></p>
+<button id="predict-button">Report car</button>
+
 <img id="selected-image" src=""/>
 <video id="myVideo" autoplay></video>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -30,8 +28,7 @@
             console.log(base64Image);
         }
         reader.readAsDataURL($("#image-selector")[0].files[0]);
-        $("#dog-prediction").text("");
-        $("#cat-prediction").text("");
+      
     });
     let value="{{URL_NAME}}"
     $("#predict-button").click(function(){
@@ -39,9 +36,7 @@
             image: base64Image
         }
         console.log(message);
-        $.post(value, JSON.stringify(message), function(response){
-            $("#dog-prediction").text(response.prediction.dog.toFixed(6));
-            $("#cat-prediction").text(response.prediction.cat.toFixed(6));
+        $.post(value, JSON.stringify(message), function(response){          
             console.log(response);
         });
     });
