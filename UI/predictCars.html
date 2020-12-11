@@ -9,13 +9,20 @@
     </style>
 </head>
 <body>
+<div style="display: grid"> 
 <input id="image-selector" type="file">
-<button id="predict-button">Report car</button>
+<button id="predict-button" style="
+    width: 300px;
+    background: blue;
+    padding: 1px;
+    margin: 20px;"
+>Report car</button>
 
 <img id="selected-image" src=""/>
-<video id="myVideo" autoplay></video>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="//wzrd.in/standalone/blob-util@latest"></script>
+
 <script>
     let base64Image;
     $("#image-selector").change(function() {
